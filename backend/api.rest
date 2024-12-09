@@ -1,1 +1,13 @@
 GET http://localhost:3000/places?text=tucurui, pa
+
+###
+GET http://localhost:3000/places?text=breu branco, pa
+
+###
+
+@originId = ChIJ4bpmJiSNv5IRoWk01iHKBvs
+
+@destinationId = ChIJAb9uB-SOv5IR8eAaD-0KOYY
+
+###
+GET http://localhost:3000/directions?originId={{ originId }}&destinationId={{ destinationId }}
