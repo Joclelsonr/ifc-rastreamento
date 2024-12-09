@@ -19,8 +19,11 @@ Content-Type: application/json
 {
     "name": "Rota 1",
     "origin_id": "{{ originId }}",
-    "destination_id": "{{ destinationId }}",
+    "destination_id": "{{ destinationId }}"
 }
 
 ### 
 GET http://localhost:3000/routes
+
+###
+GET http://localhost:3000/routes/675759eb2b3db1245872cdee
