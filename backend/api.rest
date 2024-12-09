@@ -11,3 +11,16 @@ GET http://localhost:3000/places?text=breu branco, pa
 
 ###
 GET http://localhost:3000/directions?originId={{ originId }}&destinationId={{ destinationId }}
+
+###
+POST http://localhost:3000/routes
+Content-Type: application/json
+
+{
+    "name": "Rota 1",
+    "origin_id": "{{ originId }}",
+    "destination_id": "{{ destinationId }}",
+}
+
+### 
+GET http://localhost:3000/routes
