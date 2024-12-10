@@ -1,5 +1,6 @@
 import React from "react";
 import { NewRouteForm } from "./_components/new-route-form";
+import { GoogleMaps } from "./_components/google-maps";
 
 export async function searchDirections(origin: string, destination: string) {
   const [originResponse, destinationResponse] = await Promise.all([
@@ -72,7 +73,7 @@ export default async function NewRoutePage({
 
   return (
     <div className="flex flex-1 w-full h-full">
-      <div className="w-1/3 p-4 h-full">
+      <div className="w-1/3 h-full p-4">
         <h4 className="text-3xl text-contrast mb-2">Nova Rota</h4>
         <form className="flex flex-col space-y-4" method="get">
           <div className="relative">
@@ -86,7 +87,7 @@ export default async function NewRoutePage({
             />
             <label
               htmlFor="origin"
-              className="absolute text-contrast duration-300 transform -translate-y-4 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75  peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4"
+              className="absolute text-contrast duration-300 transform -translate-y-4 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
             >
               Origen
             </label>
@@ -102,7 +103,7 @@ export default async function NewRoutePage({
             />
             <label
               htmlFor="destination"
-              className="absolute text-contrast duration-300 transform -translate-y-4 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75  peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4"
+              className="absolute text-contrast duration-300 transform -translate-y-4 scale-75 top-3 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
             >
               Destino
             </label>
@@ -115,7 +116,7 @@ export default async function NewRoutePage({
           </button>
         </form>
         {directionsData && (
-          <div className="mt-4 pb-4 border rounded text-contrast">
+          <div className="mt-4 p-4 border rounded text-contrast">
             <ul>
               <li className="mb-2">
                 <strong>Origen:</strong>
@@ -155,7 +156,7 @@ export default async function NewRoutePage({
           </div>
         )}
       </div>
-      <div>Mapa</div>
+      <GoogleMaps directionsData={directionsData} />
     </div>
   );
 }
