@@ -20,7 +20,7 @@ export function useMap(containerRef: React.RefObject<HTMLDivElement | null>) {
       ]);
       const map = new Map(containerRef.current!, {
         mapId: "8e0a97af9386fef", //theme
-        zoom: 20,
+        zoom: 14,
         center: position,
       });
       setMap(map);
