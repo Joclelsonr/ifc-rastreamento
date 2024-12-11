@@ -9,7 +9,7 @@ export async function getRoutes() {
     },
   });
   //revalidate por demanda
-  return response.json();
+  return await response.json();
 }
 
 export async function getRoute(route_id: string): Promise<RouteModel> {
@@ -19,7 +19,7 @@ export async function getRoute(route_id: string): Promise<RouteModel> {
       tags: [`routes-${route_id}`, "routes"],
     },
   });
-  return response.json();
+  return await response.json();
 }
 
 export default async function DriverPage({
@@ -29,7 +29,6 @@ export default async function DriverPage({
 }) {
   const routes = await getRoutes();
   const { route_id } = await searchParams;
-  console.log("rotas", route_id);
 
   let start_location = null;
   let end_location = null;
