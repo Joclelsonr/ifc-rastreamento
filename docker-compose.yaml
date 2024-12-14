@@ -1,0 +1,4 @@
+include:
+  - ./simulator/docker-compose.yaml
+  - ./backend/docker-compose.yaml
+  - ./frontend/docker-compose.yaml
