@@ -75,13 +75,13 @@ func DeliveryStartHandler(event *DeliveryStartedEvent, routeService *RouteServic
 	if err != nil {
 		return err
 	}
-	driverMovedEvent := NewDriverMovedEvent(route.ID, 0, 0)
-	for _, direction := range route.Directions {
-		driverMovedEvent.RouteID = route.ID
-		driverMovedEvent.Lat = direction.Lat
-		driverMovedEvent.Lng = direction.Lng
-		time.Sleep(time.Second)
-		ch <- driverMovedEvent
-	}
+
+	go func() {
+		for _, direction := range route.Directions {
+			ch <- NewDriverMovedEvent(route.ID, direction.Lat, direction.Lng)
+			time.Sleep(time.Second)
+		}
+	}()
+
 	return nil
 }
