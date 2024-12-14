@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { MapsModule } from './maps/maps.module';
 import { RoutesModule } from './routes/routes.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
     PrismaModule,
     MapsModule,
     RoutesModule,
+    KafkaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

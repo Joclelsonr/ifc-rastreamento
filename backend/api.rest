@@ -1,29 +1,34 @@
-GET http://localhost:3000/places?text=tucurui, pa
+@baseUrl = http://localhost:3000
+
+GET {{ baseUrl }}/places?text=tucurui, pa
 
 ###
-GET http://localhost:3000/places?text=breu branco, pa
+GET {{ baseUrl }}/places?text=goianesia, pa
 
 ###
 
 @originId = ChIJ4bpmJiSNv5IRoWk01iHKBvs
 
-@destinationId = ChIJAb9uB-SOv5IR8eAaD-0KOYY
+@destinationId = ChIJtd33HDiewJIRmUBy7E1kjTQ
 
 ###
-GET http://localhost:3000/directions?originId={{ originId }}&destinationId={{ destinationId }}
+GET {{ baseUrl }}/directions?originId={{ originId }}&destinationId={{ destinationId }}
 
 ###
-POST http://localhost:3000/routes
+POST {{ baseUrl }}/routes
 Content-Type: application/json
 
 {
-    "name": "Rota 1",
+    "name": "Tucuruí - Goiânesia",
     "origin_id": "{{ originId }}",
     "destination_id": "{{ destinationId }}"
 }
 
+###
+POST {{ baseUrl }}/routes/675d88f1bd7c08a50c93f065/start
+
 ### 
-GET http://localhost:3000/routes
+GET {{ baseUrl }}/routes
 
 ###
-GET http://localhost:3000/routes/675759eb2b3db1245872cdee
+GET {{ baseUrl }}/routes/675a072f06d5e00147f90f11
