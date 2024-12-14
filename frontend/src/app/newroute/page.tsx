@@ -4,13 +4,13 @@ import { GoogleMaps } from "./_components/google-maps";
 
 export async function searchDirections(origin: string, destination: string) {
   const [originResponse, destinationResponse] = await Promise.all([
-    fetch(`http://localhost:3000/places?text=${origin}`, {
+    fetch(`${process.env.NEST_API_URL}/places?text=${origin}`, {
       // cache: "force-cache",
       // next: {
       //   revalidate: 1 * 60 * 60 * 24,
       // }
     }),
-    fetch(`http://localhost:3000/places?text=${destination}`, {
+    fetch(`${process.env.NEST_API_URL}/places?text=${destination}`, {
       // cache: "force-cache",
       // next: {
       //   revalidate: 1 * 60 * 60 * 24,
@@ -32,7 +32,7 @@ export async function searchDirections(origin: string, destination: string) {
   const placeDestinationId = destinationData.candidates[0].place_id;
 
   const directionsResponse = await fetch(
-    `http://localhost:3000/directions?originId=${placeOriginId}&destinationId=${placeDestinationId}`,
+    `${process.env.NEST_API_URL}/directions?originId=${placeOriginId}&destinationId=${placeDestinationId}`,
     {
       // cache: "force-cache",
       // next: {

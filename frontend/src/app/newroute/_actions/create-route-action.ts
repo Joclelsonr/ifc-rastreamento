@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 export async function createRouteAction(state: any, formData: FormData) {
   const { originId, destinationId } = Object.fromEntries(formData);
   const directionsResponse = await fetch(
-    `http://localhost:3000/directions?originId=${originId}&destinationId=${destinationId}`,
+    `${process.env.NEST_API_URL}/directions?originId=${originId}&destinationId=${destinationId}`,
     {
       // cache: "force-cache",
       // next: {
@@ -21,7 +21,7 @@ export async function createRouteAction(state: any, formData: FormData) {
   const startAddress = directionsData.routes[0].legs[0].start_address;
   const endAddress = directionsData.routes[0].legs[0].end_address;
 
-  const response = await fetch("http://localhost:3000/routes", {
+  const response = await fetch(`${process.env.NEST_API_URL}/routes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

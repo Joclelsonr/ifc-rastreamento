@@ -1,57 +1,34 @@
 import { RouteModel } from "@/utils/models";
 import { MapDriver } from "./_components/google-map-driver";
+import { StartRouteForm } from "./_components/start-route-form";
 
 export async function getRoutes() {
-  const response = await fetch("http://localhost:3000/routes", {
+  const response = await fetch(`${process.env.NEST_API_URL}/routes`, {
     cache: "force-cache",
     next: {
       tags: ["routes"],
     },
   });
-  //revalidate por demanda
   return await response.json();
 }
 
-export async function getRoute(route_id: string): Promise<RouteModel> {
-  const response = await fetch(`http://localhost:3000/routes/${route_id}`, {
-    cache: "force-cache",
-    next: {
-      tags: [`routes-${route_id}`, "routes"],
-    },
-  });
-  return await response.json();
-}
-
-export default async function DriverPage({
-  searchParams,
-}: {
-  searchParams: { route_id?: string };
-}) {
+export default async function DriverPage() {
   const routes = await getRoutes();
-  const { route_id } = await searchParams;
-
-  let start_location = null;
-  let end_location = null;
-  if (route_id) {
-    const route = await getRoute(route_id);
-    const leg = route.direction.routes[0].legs[0];
-    start_location = {
-      lat: leg.start_location.lat,
-      lng: leg.start_location.lng,
-    };
-    end_location = { lat: leg.end_location.lat, lng: leg.end_location.lng };
-  }
 
   return (
     <div className="flex flex-1 w-full h-full">
       <div className="w-1/3 p-2 h-full">
         <h4 className="text-3xl text-contrast mb-2">Inicie uma rota</h4>
         <div className="flex flex-col">
-          <form className="flex flex-col space-y-4" method="GET">
+          <StartRouteForm>
             <select
+              id="route_id"
               name="route_id"
               className="mb-2 p-2 border rounded bg-default text-contrast"
             >
+              <option key="0" value="">
+                Selecione uma rota
+              </option>
               {routes.map((route: RouteModel) => (
                 <option key={route.id} value={route.id}>
                   {route.name}
@@ -64,14 +41,10 @@ export default async function DriverPage({
             >
               Iniciar a viagem
             </button>
-          </form>
+          </StartRouteForm>
         </div>
       </div>
-      <MapDriver
-        route_id={route_id || null}
-        start_location={start_location}
-        end_location={end_location}
-      />
+      <MapDriver routeIdElementId="route_id" />
     </div>
   );
 }

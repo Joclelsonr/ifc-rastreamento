@@ -5,12 +5,15 @@ export async function GET(
   { params }: { params: Promise<{ routeId: string }> }
 ) {
   const { routeId } = await params;
-  const response = await fetch(`http://localhost:3000/routes/${routeId}`, {
-    cache: "force-cache",
-    next: {
-      tags: [`routes-${routeId}`, "routes"],
-    },
-  });
+  const response = await fetch(
+    `${process.env.NEXT_API_URL}/routes/${routeId}`,
+    {
+      cache: "force-cache",
+      next: {
+        tags: [`routes-${routeId}`, "routes"],
+      },
+    }
+  );
   const route = await response.json();
   return NextResponse.json(route);
 }
